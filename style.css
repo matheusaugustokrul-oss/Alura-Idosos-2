@@ -2,385 +2,406 @@
 VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
 ========================================== */
 :root {
-  --cor-fundo-principal: #F1F5F9;
-  --cor-texto-principal: #0F172A;
-  --cor-cartao-fundo: #FFFFFF;
-  --cor-borda-padrao: #CBD5E1;
-  --cor-azul-escuro: #0A192F;
-  --cor-amarelo-destaque: #F59E0B;
-  --cor-vermelho-alerta: #DC2626;
-  --fator-fonte: 1;
+--cor-fundo-principal: #F1F5F9;
+--cor-texto-principal: #0F172A;
+--cor-cartao-fundo: #FFFFFF;
+--cor-borda-padrao: #CBD5E1;
+--cor-azul-escuro: #0A192F;
+--cor-amarelo-destaque: #F59E0B;
+--cor-vermelho-alerta: #DC2626;
+--fator-fonte: 1;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
 }
 
 html {
-  scroll-behavior: smooth;
+scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Atkinson Hyperlegible', sans-serif, system-ui;
-  background-color: var(--cor-fundo-principal);
-  color: var(--cor-texto-principal);
-  font-size: calc(1.2rem * var(--fator-fonte));
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+font-family: 'Atkinson Hyperlegible', sans-serif, system-ui;
+background-color: var(--cor-fundo-principal);
+color: var(--cor-texto-principal);
+font-size: calc(1.2rem * var(--fator-fonte));
+line-height: 1.6;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 }
 
 .escondido {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0, 0, 0, 0);
+border: 0;
 }
 
 /* ==========================================
-BARRA DE ACESSIBILIDADE
+BARRA DE ACESSIBILIDADE - AUMENTAR FONTE VIA CSS
 ========================================== */
 #fonte-normal:checked ~ * { --fator-fonte: 1; }
 #fonte-grande:checked ~ * { --fator-fonte: 1.25; }
-#fonte-gigante:checked ~ * { --fator-fonte: 1.45; }
+#fonte-gigante:checked ~ * { --fator-fonte: 1.5; }
+
+/* Destacar o botão de fonte selecionado */
+#fonte-normal:checked ~ .barra-acessibilidade label[for="fonte-normal"],
+#fonte-grande:checked ~ .barra-acessibilidade label[for="fonte-grande"],
+#fonte-gigante:checked ~ .barra-acessibilidade label[for="fonte-gigante"] {
+background-color: var(--cor-amarelo-destaque);
+color: #0F172A;
+border-color: #FFFFFF;
+}
 
 #contraste-alto:checked ~ * {
-  --cor-fundo-principal: #000000;
-  --cor-texto-principal: #FFFFFF;
-  --cor-cartao-fundo: #121212;
-  --cor-borda-padrao: #FFFF00;
-  --cor-azul-escuro: #000000;
+--cor-fundo-principal: #000000;
+--cor-texto-principal: #FFFFFF;
+--cor-cartao-fundo: #121212;
+--cor-borda-padrao: #FFFF00;
+--cor-azul-escuro: #000000;
 }
 
 #contraste-alto:checked ~ * .cartao-conteudo,
 #contraste-alto:checked ~ * .bloco-emergencia {
-  background-color: #121212 !important;
-  border: 3px solid #FFFF00 !important;
-  color: #FFFFFF !important;
+background-color: #121212 !important;
+border: 3px solid #FFFF00 !important;
+color: #FFFFFF !important;
 }
 
 #contraste-alto:checked ~ * .cartao-conteudo *,
 #contraste-alto:checked ~ * .bloco-emergencia * {
-  color: #FFFFFF !important;
+color: #FFFFFF !important;
 }
 
 .barra-acessibilidade {
-  background-color: #0F172A;
-  color: #FFFFFF;
-  padding: 0.75rem 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 3px solid var(--cor-amarelo-destaque);
+background-color: #0F172A;
+color: #FFFFFF;
+padding: 0.75rem 1rem;
+position: sticky;
+top: 0;
+z-index: 50;
+border-bottom: 3px solid var(--cor-amarelo-destaque);
 }
 
 .conteudo-acessibilidade {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+gap: 0.75rem;
 }
 
 .grupo-acessibilidade {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+
+.opcoes-fonte {
+display: flex;
+gap: 0.25rem;
 }
 
 .botao-fonte {
-  background-color: #1E293B;
-  color: #FFFFFF;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  border: 1px solid #64748B;
-  font-weight: bold;
+background-color: #1E293B;
+color: #FFFFFF;
+padding: 0.25rem 0.75rem;
+border-radius: 0.5rem;
+cursor: pointer;
+border: 1px solid #64748B;
+font-weight: bold;
+user-select: none;
+display: inline-block;
+font-size: calc(1rem * var(--fator-fonte));
 }
 
 .divisor-barra {
-  height: 1.5rem;
-  width: 1px;
-  background-color: #475569;
+height: 1.5rem;
+width: 1px;
+background-color: #475569;
 }
 
 .botao-contraste {
-  background-color: var(--cor-amarelo-destaque);
-  color: #0F172A;
-  font-weight: 900;
-  padding: 0.35rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
+background-color: var(--cor-amarelo-destaque);
+color: #0F172A;
+font-weight: 900;
+padding: 0.35rem 1rem;
+border-radius: 0.5rem;
+cursor: pointer;
+user-select: none;
+font-size: calc(1rem * var(--fator-fonte));
+border: none;
 }
 
 /* ==========================================
 CABEÇALHO
 ========================================== */
 .cabecalho-principal {
-  background-color: var(--cor-azul-escuro);
-  color: #FFFFFF;
-  padding: 2.5rem 1rem;
-  border-bottom: 8px solid var(--cor-amarelo-destaque);
+background-color: var(--cor-azul-escuro);
+color: #FFFFFF;
+padding: 2.5rem 1rem;
+border-bottom: 8px solid var(--cor-amarelo-destaque);
 }
 
 .conteudo-cabecalho {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+gap: 2rem;
 }
 
 @media (min-width: 768px) {
-  .conteudo-cabecalho {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
+.conteudo-cabecalho {
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+}
 }
 
 .coluna-texto-cabecalho {
-  flex: 1;
+flex: 1;
 }
 
 .etiqueta-destaque {
-  display: inline-block;
-  padding: 0.35rem 1rem;
-  border-radius: 9999px;
-  background-color: #1E40AF;
-  color: #FDE047;
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
+display: inline-block;
+padding: 0.35rem 1rem;
+border-radius: 9999px;
+background-color: #1E40AF;
+color: #FDE047;
+font-weight: bold;
+font-size: calc(0.95rem * var(--fator-fonte));
+margin-bottom: 1rem;
 }
 
 .titulo-cabecalho {
-  font-size: 2.2rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
+font-size: calc(2.2rem * var(--fator-fonte));
+font-weight: 900;
+margin-bottom: 1rem;
 }
 
 .descricao-cabecalho {
-  font-size: 1.25rem;
-  color: #E0E7FF;
+font-size: calc(1.25rem * var(--fator-fonte));
+color: #E0E7FF;
 }
 
 .coluna-botoes-cabecalho {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+display: flex;
+flex-direction: column;
+gap: 1rem;
 }
 
 .botao-perigo {
-  background-color: var(--cor-vermelho-alerta);
-  color: #FFFFFF;
-  font-weight: 900;
-  font-size: 1.1rem;
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  text-decoration: none;
-  text-align: center;
-  border: 4px solid #FCA5A5;
+background-color: var(--cor-vermelho-alerta);
+color: #FFFFFF;
+font-weight: 900;
+font-size: calc(1.1rem * var(--fator-fonte));
+padding: 1rem 1.5rem;
+border-radius: 1rem;
+text-decoration: none;
+text-align: center;
+border: 4px solid #FCA5A5;
 }
 
 .botao-destaque {
-  background-color: var(--cor-amarelo-destaque);
-  color: #0F172A;
-  font-weight: 900;
-  font-size: 1.1rem;
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
-  text-decoration: none;
-  text-align: center;
+background-color: var(--cor-amarelo-destaque);
+color: #0F172A;
+font-weight: 900;
+font-size: calc(1.1rem * var(--fator-fonte));
+padding: 1rem 1.5rem;
+border-radius: 1rem;
+text-decoration: none;
+text-align: center;
 }
 
 /* ==========================================
 JANELA POPUP NA FRENTE (MODAL)
 ========================================== */
 .modal-de-ajuda {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 520px;
-  max-width: 90%;
-  z-index: 99999;
+display: block;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 520px;
+max-width: 90%;
+z-index: 99999;
 }
 
 .modal-de-ajuda::before {
-  content: "";
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(2px);
-  z-index: -1;
+content: "";
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100vw;
+height: 100vh;
+background-color: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(2px);
+z-index: -1;
 }
 
 .bloco-emergencia {
-  background-color: #EEF2FF;
-  padding: 2rem;
-  border-radius: 1.25rem;
-  border: 3px dashed #3B82F6;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+background-color: #EEF2FF;
+padding: 2rem;
+border-radius: 1.25rem;
+border: 3px dashed #3B82F6;
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 .cabecalho-emergencia-bloco {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 3px solid var(--cor-amarelo-destaque);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 3px solid var(--cor-amarelo-destaque);
+padding-bottom: 0.5rem;
+margin-bottom: 1rem;
 }
 
 .titulo-emergencia {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--cor-azul-escuro);
+font-size: calc(1.75rem * var(--fator-fonte));
+font-weight: 800;
+color: var(--cor-azul-escuro);
 }
 
 .botao-fechar-modal {
-  text-decoration: none;
-  color: #64748B;
-  font-size: 1.5rem;
-  font-weight: 900;
+text-decoration: none;
+color: #64748B;
+font-size: calc(1.5rem * var(--fator-fonte));
+font-weight: 900;
 }
 
 .descricao-emergencia {
-  font-size: 1.1rem;
-  color: #334155;
-  margin-bottom: 1.25rem;
+font-size: calc(1.1rem * var(--fator-fonte));
+color: #334155;
+margin-bottom: 1.25rem;
 }
 
 .lista-passos-modal {
-  padding-left: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  font-size: 1.1rem;
-  color: #1E293B;
-  margin-bottom: 1.5rem;
+padding-left: 1.5rem;
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+font-size: calc(1.1rem * var(--fator-fonte));
+color: #1E293B;
+margin-bottom: 1.5rem;
 }
 
 .caixa-fechar-modal {
-  text-align: center;
+text-align: center;
 }
 
 .botao-entendi-modal {
-  background-color: var(--cor-azul-escuro);
-  color: #FFFFFF;
-  font-weight: bold;
-  padding: 0.75rem 1.75rem;
-  border-radius: 0.75rem;
-  text-decoration: none;
-  display: inline-block;
+background-color: var(--cor-azul-escuro);
+color: #FFFFFF;
+font-weight: bold;
+padding: 0.75rem 1.75rem;
+border-radius: 0.75rem;
+text-decoration: none;
+display: inline-block;
+font-size: calc(1.05rem * var(--fator-fonte));
 }
 
 /* ==========================================
 CONTEÚDO PRINCIPAL
 ========================================== */
 .conteudo-principal {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 2.5rem 1rem;
+display: flex;
+flex-direction: column;
+gap: 3rem;
+width: 100%;
 }
 
 .cabecalho-secao {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  border-bottom: 4px solid var(--cor-amarelo-destaque);
-  padding-bottom: 0.75rem;
-  margin-bottom: 2rem;
+display: flex;
+align-items: center;
+gap: 0.75rem;
+border-bottom: 4px solid var(--cor-amarelo-destaque);
+padding-bottom: 0.75rem;
+margin-bottom: 2rem;
 }
 
 .numero-secao {
-  background-color: var(--cor-amarelo-destaque);
-  color: #0F172A;
-  font-weight: 900;
-  border-radius: 9999px;
-  width: 2.75rem;
-  height: 2.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
+background-color: var(--cor-amarelo-destaque);
+color: #0F172A;
+font-weight: 900;
+border-radius: 9999px;
+width: 2.75rem;
+height: 2.75rem;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: calc(1.35rem * var(--fator-fonte));
 }
 
 .titulo-secao {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--cor-azul-escuro);
+font-size: calc(1.75rem * var(--fator-fonte));
+font-weight: 800;
+color: var(--cor-azul-escuro);
 }
 
 .grade-tres-colunas {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+display: grid;
+grid-template-columns: 1fr;
+gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .grade-tres-colunas {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.grade-tres-colunas {
+grid-template-columns: repeat(3, 1fr);
+}
 }
 
 .grade-duas-colunas {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+display: grid;
+grid-template-columns: 1fr;
+gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .grade-duas-colunas {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.grade-duas-colunas {
+grid-template-columns: repeat(2, 1fr);
+}
 }
 
 .cartao-conteudo {
-  background-color: var(--cor-cartao-fundo);
-  padding: 1.5rem;
-  border-radius: 1.25rem;
-  border: 2px solid var(--cor-borda-padrao);
+background-color: var(--cor-cartao-fundo);
+padding: 1.5rem;
+border-radius: 1.25rem;
+border: 2px solid var(--cor-borda-padrao);
 }
 
 .cartao-horizontal {
-  display: flex;
-  gap: 1rem;
+display: flex;
+gap: 1rem;
 }
 
 .icone-cartao {
-  font-size: 2rem;
-  background-color: #FEF3C7;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  flex-shrink: 0;
+font-size: calc(2rem * var(--fator-fonte));
+background-color: #FEF3C7;
+width: 3.5rem;
+height: 3.5rem;
+border-radius: 0.75rem;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 1rem;
+flex-shrink: 0;
 }
 
 .icone-cartao-vermelho { background-color: #FEE2E2; }
@@ -388,38 +409,294 @@ CONTEÚDO PRINCIPAL
 .icone-cartao-azul { background-color: #EFF6FF; }
 
 .titulo-cartao {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--cor-azul-escuro);
-  margin-bottom: 0.5rem;
+font-size: calc(1.25rem * var(--fator-fonte));
+font-weight: bold;
+color: var(--cor-azul-escuro);
+margin-bottom: 0.5rem;
 }
 
 .texto-cartao {
-  color: #334155;
-  font-size: 1.05rem;
+color: #334155;
+font-size: calc(1.05rem * var(--fator-fonte));
 }
 
 /* RODAPÉ */
 .rodape-pagina {
-  background-color: #0F172A;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 2rem 1rem;
-  border-top: 8px solid var(--cor-amarelo-destaque);
+background-color: #0F172A;
+color: #FFFFFF;
+text-align: center;
+padding: 2rem 1rem;
+border-top: 8px solid var(--cor-amarelo-destaque);
 }
 
 .conteudo-rodape {
-  max-width: 1200px;
-  margin: 0 auto;
+max-width: 1200px;
+margin: 0 auto;
 }
 
 .titulo-rodape {
-  font-size: 1.35rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+font-size: calc(1.35rem * var(--fator-fonte));
+font-weight: bold;
+margin-bottom: 0.5rem;
 }
 
 .subtitulo-rodape {
-  color: #CBD5E1;
-  font-size: 1rem;
+color: #CBD5E1;
+font-size: calc(1rem * var(--fator-fonte));
 }
+
+/* ==========================================
+ADICIONAIS SOLICITADOS (REGRAS DE SUPORTE)
+========================================== */
+html:has(#fonte-normal:checked) { --fator-fonte: 1; }
+html:has(#fonte-grande:checked) { --fator-fonte: 1.25; }
+html:has(#fonte-gigante:checked) { --fator-fonte: 1.5; }
+
+.botao-voz {
+background-color: #2563EB;
+color: #FFFFFF;
+font-weight: 900;
+padding: 0.35rem 1rem;
+border-radius: 0.5rem;
+cursor: pointer;
+user-select: none;
+font-size: calc(1rem * var(--fator-fonte));
+border: none;
+display: flex;
+align-items: center;
+gap: 0.4rem;
+}
+
+.botao-voz:hover {
+background-color: #1D4ED8;
+}
+
+
+<input type="radio" id="fonte-normal" name="tamanhoFonte" class="escondido" checked>
+<input type="radio" id="fonte-grande" name="tamanhoFonte" class="escondido">
+<input type="radio" id="fonte-gigante" name="tamanhoFonte" class="escondido">
+<input type="checkbox" id="contraste-alto" class="escondido">
+
+<!-- BARRA DE ACESSIBILIDADE -->
+<aside aria-label="Controles de Acessibilidade" class="barra-acessibilidade">
+    <div class="conteudo-acessibilidade">
+        <span class="rotulo-acessibilidade">
+            <span>👁️</span> Acessibilidade:
+        </span>
+
+        <div class="grupo-acessibilidade">
+            <span class="rotulo-tamanho-fonte">Tamanho da Letra:</span>
+            <div class="opcoes-fonte">
+                <label for="fonte-normal" class="botao-fonte" title="Tamanho de texto Normal">A</label>
+                <label for="fonte-grande" class="botao-fonte botao-fonte-medio" title="Tamanho de texto Grande">A+</label>
+                <label for="fonte-gigante" class="botao-fonte botao-fonte-grande" title="Tamanho de texto Muito Grande">A++</label>
+            </div>
+
+            <div class="divisor-barra"></div>
+
+            <label for="contraste-alto" class="botao-contraste">
+                <span>🌓</span> Alto Contraste
+            </label>
+
+            <div class="divisor-barra"></div>
+
+            <!-- ACRESCIDO: BOTÃO DE LEITURA EM VOZ ALTA -->
+            <button type="button" id="btn-ouvir-pagina" class="botao-voz" title="Ouvir conteúdo da página">
+                <span>🔊</span> <span id="texto-btn-voz">Ouvir Página</span>
+            </button>
+        </div>
+    </div>
+</aside>
+
+<!-- CABEÇALHO DA PÁGINA -->
+<header class="cabecalho-principal">
+    <div class="conteudo-cabecalho">
+
+        <div class="coluna-texto-cabecalho">
+            <div class="etiqueta-destaque">
+                🛡️ Guia Oficial para Terceira Idade
+            </div>
+            <h1 class="titulo-cabecalho">
+                Guia de Segurança Digital
+            </h1>
+            <p class="descricao-cabecalho">
+                Proteja-se e navegue com tranquilidade.
+            </p>
+        </div>
+
+        <div class="coluna-botoes-cabecalho">
+            <a href="#emergencia" class="botao-perigo">
+                <span class="icone-botao-socorro">🆘</span>
+                <span>PRECISO DE AJUDA AGORA</span>
+            </a>
+            <a href="#dicas-importantes" class="botao-destaque">
+                <span>💡 Ver Dicas Rápidas</span>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<!-- CONTEÚDO PRINCIPAL DO GUIA -->
+<main class="conteudo-principal">
+
+    <!-- SEÇÃO 1: DICAS IMPORTANTES -->
+    <section id="dicas-importantes" class="secao-bloco" aria-labelledby="dicas-titulo">
+        <div class="cabecalho-secao">
+            <span class="numero-secao">1</span>
+            <h2 id="dicas-titulo" class="titulo-secao">
+                Dicas Importantes
+            </h2>
+        </div>
+
+        <div class="grade-tres-colunas">
+
+            <div class="cartao-conteudo">
+                <div>
+                    <div class="icone-cartao icone-cartao-vermelho">🛑</div>
+                    <h3 class="titulo-cartao">1. Use senhas fortes</h3>
+                    <p class="texto-cartao">
+                        Prefira frases longas e fáceis de lembrar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cartao-conteudo">
+                <div>
+                    <div class="icone-cartao">🔑</div>
+                    <h3 class="titulo-cartao">2. Desconfie de urgências</h3>
+                    <p class="texto-cartao">
+                        Se alguém pedir dinheiro rápido dizendo que é emergência, pare e ligue para a pessoa antes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cartao-conteudo">
+                <div>
+                    <div class="icone-cartao icone-cartao-azul-claro">📞</div>
+                    <h3 class="titulo-cartao">3. Não clique em links</h3>
+                    <p class="texto-cartao">
+                        Evite clicar em links recebidos por mensagem ou e-mail de desconhecidos.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: DIREITOS -->
+    <section class="secao-bloco" aria-labelledby="direitos-titulo">
+        <div class="cabecalho-secao">
+            <span class="numero-secao">2</span>
+            <h2 id="direitos-titulo" class="titulo-secao">
+                Seus Direitos na Internet
+            </h2>
+        </div>
+
+        <div class="grade-duas-colunas">
+
+            <div class="cartao-conteudo cartao-horizontal">
+                <span class="icone-cartao icone-cartao-azul">🛡️</span>
+                <div>
+                    <h3 class="titulo-cartao">Direito à Privacidade (LGPD)</h3>
+                    <p class="texto-cartao">Nenhuma empresa ou pessoa pode vender ou passar seus dados sem a sua permissão.</p>
+                </div>
+            </div>
+
+            <div class="cartao-conteudo cartao-horizontal">
+                <span class="icone-cartao icone-cartao-azul">🚫</span>
+                <div>
+                    <h3 class="titulo-cartao">Sem Empréstimos Forçados</h3>
+                    <p class="texto-cartao">Bancos não podem contratar serviços na sua conta sem o seu pedido direto.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- RODAPÉ DA PÁGINA -->
+<footer class="rodape-pagina">
+    <div class="conteudo-rodape">
+        <p class="titulo-rodape">Guia Prático de Segurança Digital para Idosos</p>
+        <p class="subtitulo-rodape">Desenvolvido com carinho para garantir sua segurança e tranquilidade na internet.</p>
+    </div>
+</footer>
+
+<!-- JANELA POPUP EXIBIDA POR PADRÃO NA FRENTE -->
+<div id="emergencia" class="modal-de-ajuda" role="dialog" aria-labelledby="emergencia-titulo" aria-modal="true">
+    <div class="bloco-emergencia">
+        
+        <div class="cabecalho-emergencia-bloco">
+            <h2 id="emergencia-titulo" class="titulo-emergencia">
+                O que fazer agora?
+            </h2>
+            <a href="#" class="botao-fechar-modal" aria-label="Fechar janela" title="Fechar janela">✕</a>
+        </div>
+
+        <p class="descricao-emergencia">
+            Se você acha que caiu em um golpe ou está com medo de uma mensagem:
+        </p>
+
+        <ol class="lista-passos-modal">
+            <li><strong>Pare tudo o que está fazendo.</strong></li>
+            <li><strong>Ligue para um filho, neto ou amigo próximo.</strong></li>
+            <li><strong>Ligue para o seu banco</strong> usando o número que está atrás do seu cartão.</li>
+            <li><strong>Registre um Boletim de Ocorrência</strong> na delegacia mais próxima ou pela internet.</li>
+        </ol>
+
+        <div class="caixa-fechar-modal">
+            <a href="#" class="botao-entendi-modal">
+                Entendi / Fechar
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Fecha a modal ao clicar em fechar ou entendi (original)
+    document.querySelectorAll('.botao-fechar-modal, .botao-entendi-modal').forEach(botao => {
+        botao.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('emergencia').style.display = 'none';
+        });
+    });
+
+    // ACRESCIDO: Garantia de funcionamento do redimensionamento de fonte
+    const radiosFonte = document.querySelectorAll('input[name="tamanhoFonte"]');
+    radiosFonte.forEach(radio => {
+        radio.addEventListener('change', () => {
+            let fator = 1;
+            if (document.getElementById('fonte-grande').checked) fator = 1.25;
+            if (document.getElementById('fonte-gigante').checked) fator = 1.5;
+            document.documentElement.style.setProperty('--fator-fonte', fator);
+        });
+    });
+
+    // ACRESCIDO: Funcionalidade do Botão de Leitura em Voz Alta (Speech Synthesis API)
+    const btnOuvir = document.getElementById('btn-ouvir-pagina');
+    const textoBtnVoz = document.getElementById('texto-btn-voz');
+    let lendo = false;
+    const sintese = window.speechSynthesis;
+
+    btnOuvir.addEventListener('click', () => {
+        if (lendo || sintese.speaking) {
+            sintese.cancel();
+            lendo = false;
+            textoBtnVoz.innerText = 'Ouvir Página';
+            btnOuvir.querySelector('span').innerText = '🔊';
+            return;
+        }
+
+        // Captura os textos principais da página para leitura clara
+        const seletores = [
+            '.titulo-cabecalho',
+            '.descricao-cabecalho',
+            '.titulo-secao',
+            '.titulo-cartao',
+            '.texto-cartao'
+        ];
+
+        const elementos = document.querySelectorAll(seletores.join(', '));
