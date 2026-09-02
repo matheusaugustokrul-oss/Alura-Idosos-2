@@ -13,31 +13,33 @@
 
 <body>
 
-    <input type="radio" id="fonte-normal" name="tamanhoFonte" class="escondido" checked>
-    <input type="radio" id="fonte-grande" name="tamanhoFonte" class="escondido">
-    <input type="radio" id="fonte-gigante" name="tamanhoFonte" class="escondido">
     <input type="checkbox" id="contraste-alto" class="escondido">
 
     <!-- BARRA DE ACESSIBILIDADE -->
     <aside aria-label="Controles de Acessibilidade" class="barra-acessibilidade">
         <div class="conteudo-acessibilidade">
             <span class="rotulo-acessibilidade">
-                <span>👁️</span> Acessibilidade:
+                <span aria-hidden="true">👁️</span> Acessibilidade:
             </span>
 
             <div class="grupo-acessibilidade">
                 <span class="rotulo-tamanho-fonte">Tamanho da Letra:</span>
                 <div class="opcoes-fonte">
-                    <label for="fonte-normal" class="botao-fonte" title="Tamanho de texto Normal">A</label>
-                    <label for="fonte-grande" class="botao-fonte botao-fonte-medio" title="Tamanho de texto Grande">A+</label>
-                    <label for="fonte-gigante" class="botao-fonte botao-fonte-grande" title="Tamanho de texto Muito Grande">A++</label>
+                    <button type="button" id="btn-aumentar-fonte" class="botao-fonte" title="Aumentar o tamanho do texto">A+</button>
+                    <button type="button" id="btn-diminuir-fonte" class="botao-fonte" title="Diminuir o tamanho do texto">A-</button>
                 </div>
 
                 <div class="divisor-barra"></div>
 
-                <label for="contraste-alto" class="botao-contraste">
-                    <span>🌓</span> Alto Contraste
+                <label for="contraste-alto" class="botao-contraste" tabindex="0">
+                    <span aria-hidden="true">🌓</span> Alto Contraste
                 </label>
+
+                <div class="divisor-barra"></div>
+
+                <button type="button" id="btn-ouvir-pagina" class="botao-voz" title="Ouvir conteúdo da página">
+                    <span aria-hidden="true">🔊</span> <span id="texto-btn-voz">Ouvir Página</span>
+                </button>
             </div>
         </div>
     </aside>
@@ -48,7 +50,7 @@
 
             <div class="coluna-texto-cabecalho">
                 <div class="etiqueta-destaque">
-                    🛡️ Guia Oficial para Terceira Idade
+                    <span aria-hidden="true">🛡️</span> Guia Oficial para Terceira Idade
                 </div>
                 <h1 class="titulo-cabecalho">
                     Guia de Segurança Digital
@@ -60,11 +62,11 @@
 
             <div class="coluna-botoes-cabecalho">
                 <a href="#emergencia" class="botao-perigo">
-                    <span class="icone-botao-socorro">🆘</span>
+                    <span class="icone-botao-socorro" aria-hidden="true">🆘</span>
                     <span>PRECISO DE AJUDA AGORA</span>
                 </a>
                 <a href="#dicas-importantes" class="botao-destaque">
-                    <span>💡 Ver Dicas Rápidas</span>
+                    <span aria-hidden="true">💡</span> <span>Ver Dicas Rápidas</span>
                 </a>
             </div>
 
@@ -87,7 +89,7 @@
 
                 <div class="cartao-conteudo">
                     <div>
-                        <div class="icone-cartao icone-cartao-vermelho">🛑</div>
+                        <div class="icone-cartao icone-cartao-vermelho" aria-hidden="true">🛑</div>
                         <h3 class="titulo-cartao">1. Use senhas fortes</h3>
                         <p class="texto-cartao">
                             Prefira frases longas e fáceis de lembrar.
@@ -97,7 +99,7 @@
 
                 <div class="cartao-conteudo">
                     <div>
-                        <div class="icone-cartao">🔑</div>
+                        <div class="icone-cartao" aria-hidden="true">🔑</div>
                         <h3 class="titulo-cartao">2. Desconfie de urgências</h3>
                         <p class="texto-cartao">
                             Se alguém pedir dinheiro rápido dizendo que é emergência, pare e ligue para a pessoa antes.
@@ -107,7 +109,7 @@
 
                 <div class="cartao-conteudo">
                     <div>
-                        <div class="icone-cartao icone-cartao-azul-claro">📞</div>
+                        <div class="icone-cartao icone-cartao-azul-claro" aria-hidden="true">📞</div>
                         <h3 class="titulo-cartao">3. Não clique em links</h3>
                         <p class="texto-cartao">
                             Evite clicar em links recebidos por mensagem ou e-mail de desconhecidos.
@@ -130,7 +132,7 @@
             <div class="grade-duas-colunas">
 
                 <div class="cartao-conteudo cartao-horizontal">
-                    <span class="icone-cartao icone-cartao-azul">🛡️</span>
+                    <span class="icone-cartao icone-cartao-azul" aria-hidden="true">🛡️</span>
                     <div>
                         <h3 class="titulo-cartao">Direito à Privacidade (LGPD)</h3>
                         <p class="texto-cartao">Nenhuma empresa ou pessoa pode vender ou passar seus dados sem a sua permissão.</p>
@@ -138,7 +140,7 @@
                 </div>
 
                 <div class="cartao-conteudo cartao-horizontal">
-                    <span class="icone-cartao icone-cartao-azul">🚫</span>
+                    <span class="icone-cartao icone-cartao-azul" aria-hidden="true">🚫</span>
                     <div>
                         <h3 class="titulo-cartao">Sem Empréstimos Forçados</h3>
                         <p class="texto-cartao">Bancos não podem contratar serviços na sua conta sem o seu pedido direto.</p>
@@ -189,13 +191,94 @@
         </div>
     </div>
 
+    <!-- SCRIPT DA PÁGINA -->
     <script>
-        // Fecha a modal ao clicar em fechar ou entendi
-        document.querySelectorAll('.botao-fechar-modal, .botao-entendi-modal').forEach(botao => {
+        // Modal de Emergência
+        const modal = document.getElementById('emergencia');
+        const botoesFechar = document.querySelectorAll('.botao-fechar-modal, .botao-entendi-modal');
+
+        botoesFechar.forEach(botao => {
             botao.addEventListener('click', (e) => {
                 e.preventDefault();
-                document.getElementById('emergencia').style.display = 'none';
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
             });
+        });
+
+        // Controle de Aumento e Diminuição da Fonte
+        const btnAumentar = document.getElementById('btn-aumentar-fonte');
+        const btnDiminuir = document.getElementById('btn-diminuir-fonte');
+        let fatorFonte = 1;
+
+        btnAumentar.addEventListener('click', () => {
+            if (fatorFonte < 1.6) {
+                fatorFonte += 0.15;
+                document.documentElement.style.setProperty('--fator-fonte', fatorFonte);
+            }
+        });
+
+        btnDiminuir.addEventListener('click', () => {
+            if (fatorFonte > 0.85) {
+                fatorFonte -= 0.15;
+                document.documentElement.style.setProperty('--fator-fonte', fatorFonte);
+            }
+        });
+
+        // Suporte a teclado no botão Alto Contraste
+        const labelContraste = document.querySelector('.botao-contraste');
+        labelContraste.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                document.getElementById('contraste-alto').click();
+            }
+        });
+
+        // Leitura em Voz Alta
+        const btnOuvir = document.getElementById('btn-ouvir-pagina');
+        const textoBtnVoz = document.getElementById('texto-btn-voz');
+        let lendo = false;
+        const sintese = window.speechSynthesis;
+
+        btnOuvir.addEventListener('click', () => {
+            if (lendo || sintese.speaking) {
+                sintese.cancel();
+                lendo = false;
+                textoBtnVoz.innerText = 'Ouvir Página';
+                btnOuvir.querySelector('span').innerText = '🔊';
+                return;
+            }
+
+            const seletores = [
+                '.titulo-cabecalho',
+                '.descricao-cabecalho',
+                '.titulo-secao',
+                '.titulo-cartao',
+                '.texto-cartao'
+            ];
+
+            const elementos = document.querySelectorAll(seletores.join(', '));
+            let textoCompleto = "";
+
+            elementos.forEach(el => {
+                textoCompleto += el.innerText + ". ";
+            });
+
+            if (textoCompleto.trim() !== "") {
+                const locucao = new SpeechSynthesisUtterance(textoCompleto);
+                locucao.lang = 'pt-BR';
+                locucao.rate = 0.9;
+
+                locucao.onend = () => {
+                    lendo = false;
+                    textoBtnVoz.innerText = 'Ouvir Página';
+                    btnOuvir.querySelector('span').innerText = '🔊';
+                };
+
+                sintese.speak(locucao);
+                lendo = true;
+                textoBtnVoz.innerText = 'Parar Leitura';
+                btnOuvir.querySelector('span').innerText = '⏹️';
+            }
         });
     </script>
 
